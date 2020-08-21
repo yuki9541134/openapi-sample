@@ -1,0 +1,139 @@
+openapi: 3.0.2
+info:
+  version: 1.3.0
+  title: SampleAPI
+  description: |
+    サンプルののAPI定義です。
+servers:
+  - url: http://localhost:8888/api/v1
+tags:
+  - name: サンプル
+    description: サンプルに関するAPI
+paths:
+  /sample:
+    post:
+      operationId: registerMember
+      summary: サンプル
+      tags:
+        - サンプル
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostMemberForm'
+        required: true
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SigninResponse'
+        500:
+          $ref: '#/components/responses/InternalServerError'
+components:
+  schemas:
+    SigninResponse:
+      title: SigninResponse
+      description: ログインAPIのレスポンス
+      type: object
+      properties:
+        profile:
+          type: object
+          $ref: "#/components/schemas/Member"
+      required:
+        - profile
+    PostMemberForm:
+      title: PostMemberForm
+      description: メンバー登録フォーム
+      type: object
+      properties:
+        email:
+          type: string
+          description: メールアドレス
+          example: test@test.com
+        password:
+          type: string
+          description: パスワード
+          example: password
+      required:
+        - email
+        - password
+    Member:
+      title: Member
+      description: 会員情報
+      type: object
+      properties:
+        memberId:
+          description: メンバーID
+          type: integer
+          format: int32
+          example: 12345
+        email:
+          type: string
+          description: メールアドレス
+          example: test@test.com
+      required:
+        - memberId
+        - email
+    ApiErrorResponse:
+      title: ApiErrorResponse
+      description: APIエラーレスポンス
+      type: object
+      properties:
+        code:
+          description: HTTPステータスコード
+          type: integer
+          format: int32
+          example: 400
+        message:
+          description: エラーメッセージ
+          type: string
+          example: "不正なパラメータ"
+        errors:
+          description: エラー詳細
+          type: array
+          items:
+            $ref: "#/components/schemas/ApiError"
+          example:
+            - target: "email"
+              code: "INVALID_PARAMETER"
+              message: "このメールアドレスは使用できません。"
+            - target: "password"
+              code: "PARAMETER_REQUIRED"
+              message: "パスワードを入力してください。"
+      required:
+        - code
+        - message
+        - errors
+    ApiError:
+      title: ApiError
+      description: APIエラー
+      type: object
+      properties:
+        target:
+          description: エラー対象 
+          type: string
+          example: "email"
+        errorCode:
+          description: エラーコード
+          type: string
+          example: "INVALID_PARAM"
+        errorMessage:  
+          description: エラーメッセージ
+          type: string
+          example: "このメールアドレスは使用できません。"
+      required:
+        - errorCode
+        - errorMessage
+  responses:
+    InternalServerError:
+      description: 500 Internal Server Error
+      content: 
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiErrorResponse'
+          example:
+            code: 500
+            message: "サーバーエラー"
+            errors: []
