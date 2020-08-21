@@ -1,5 +1,5 @@
 # openapi-sample
-OpenAPIによるAPI定義をすると、TypeScriptのコードが自動生成され、npmパッケージとして使えるようになるサンプル
+OpenAPIのAPI定義ファイルを作成すると、クライアント側のTypeScriptコードが自動生成され、npmパッケージとして使えるようになるサンプル
 
 # 使い方
 ### API定義側
