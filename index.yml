@@ -73,6 +73,10 @@ components:
           type: string
           description: メールアドレス
           example: test@test.com
+        email2:
+          type: string
+          description: メールアドレス2
+          example: test@test.com
       required:
         - memberId
         - email
