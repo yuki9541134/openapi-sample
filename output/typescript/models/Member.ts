@@ -31,6 +31,12 @@ export interface Member {
      * @memberof Member
      */
     email: string;
+    /**
+     * メールアドレス2
+     * @type {string}
+     * @memberof Member
+     */
+    email2?: string;
 }
 
 export function MemberFromJSON(json: any): Member {
@@ -45,6 +51,7 @@ export function MemberFromJSONTyped(json: any, ignoreDiscriminator: boolean): Me
         
         'memberId': json['memberId'],
         'email': json['email'],
+        'email2': !exists(json, 'email2') ? undefined : json['email2'],
     };
 }
 
@@ -59,6 +66,7 @@ export function MemberToJSON(value?: Member | null): any {
         
         'memberId': value.memberId,
         'email': value.email,
+        'email2': value.email2,
     };
 }
 
