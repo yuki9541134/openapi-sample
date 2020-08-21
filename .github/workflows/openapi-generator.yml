@@ -22,7 +22,7 @@ jobs:
     - run: npm ci
 
     - name: setup
-      run: npm install @openapitools/openapi-generator-cli
+      run: sudo npm install @openapitools/openapi-generator-cli -g
 
     - name: generate client typescript code
       run: openapi-generator generate -i index.yml -g typescript-fetch -o output/typescript
