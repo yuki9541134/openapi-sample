@@ -9,12 +9,20 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x]
 
     steps:
     - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: npm ci
 
     - name: setup
-      run: npm install @openapitools/openapi-generator-cli -g
+      run: npm install @openapitools/openapi-generator-cli
 
     - name: generate client typescript code
       run: openapi-generator generate -i index.yml -g typescript-fetch -o output/typescript
