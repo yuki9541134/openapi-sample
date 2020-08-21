@@ -1,9 +1,9 @@
 # openapi-sample
-OpenAPIのAPI定義ファイルを作成すると、クライアント側のTypeScriptコードが自動生成され、npmパッケージとして使えるようになるサンプル
+OpenAPIのAPI定義ファイルを作成すると、クライアント側のTypeScriptコードが自動生成され、npmパッケージとして使えるようになるサンプルです。
 
 # 使い方
 ### API定義側
-index.ymlを変更するPRを作成すると、github-actionが発火して、output/typescript以下にTypeScriptコードが自動生成される。
+index.ymlを変更するPRを作成すると、Github Actionsが発火して、output/typescript以下にクライアント側のコードが自動生成される。
 
 ### パッケージ利用者側
 - パッケージのインストール
