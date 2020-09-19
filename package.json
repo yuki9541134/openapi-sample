@@ -1,5 +1,5 @@
 {
-  "name": "sample-api-client",
+  "name": "@yuki9541134/sample-api-client",
   "version": "1.0.0",
   "description": "sample api client.",
   "main": "output/typescript/index.ts",

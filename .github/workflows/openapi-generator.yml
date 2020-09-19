@@ -33,3 +33,6 @@ jobs:
           message: 'generate'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: publish
+      run: npm publish
